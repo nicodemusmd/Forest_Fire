@@ -24,9 +24,9 @@ def predRespPlots(X, y, save = False, path = "", file_type = ".png"):
     col = X.columns.drop(y)
     for c in col:
         if isinstance(X[c][0], str):
-            X.boxplot('area', by = c)
+            X.boxplot(y, by = c)
             if save:
-                file = f"{path}/area_by_{c}" + file_type
+                file = f"{path}/{y}_by_{c}" + file_type
                 plt.savefig(f"{file}")
         else:
             fig = plt.figure()
@@ -35,7 +35,7 @@ def predRespPlots(X, y, save = False, path = "", file_type = ".png"):
             plt.ylabel(y)
             
             if save:
-                file = f"{path}/area_by_{c}" + file_type
+                file = f"{path}/{y}_by_{c}" + file_type
                 fig.savefig(f"{file}")
         plt.show()
 
