@@ -113,6 +113,8 @@ def plot_feature_selection_criterion(df, X_fs, y_fs):
 
     fig.suptitle('Subset selection using C_p, AIC, BIC, Adjusted R2', fontsize = 16)
     plt.show()
+    return df
+
 # print("---------------------------------------")
 # print("---------------------------------------")
 # print(f"\nModel: {r.activation} \nLayers: {r.n_layers_} \nSize: {s} \nMSE: {MSE(y_test, y_pred)}\nR^2 Score: {round(r2_score(y_test, y_pred), 2)}\nExplained Variace: {round(EV(y_test, y_pred),2)}\nMean Absolute Error: {round(MAE(y_test, y_pred),2)}")
