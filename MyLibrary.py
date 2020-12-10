@@ -47,10 +47,10 @@ def predRespPlots(X, y, save = False, path = "", file_type = ".png"):
 
 
 def fit_linear_reg(X,Y):    
-    model_k = linear_model.LinearRegression(fit_intercept = True)
-    model_k.fit(X,Y)
-    RSS = MSE(Y,model_k.predict(X)) * len(Y)
-    R_squared = model_k.score(X,Y)
+    model = linear_model.LinearRegression(fit_intercept = True)
+    model.fit(X,Y)
+    RSS = MSE(Y,model.predict(X)) * len(Y)
+    R_squared = model.score(X,Y)
     return RSS, R_squared
 
 def feature_selection(X_fs, y_fs):
@@ -86,10 +86,11 @@ def feature_selection(X_fs, y_fs):
     df1['numb_features'] = df1.index
     return df1
 
-def plot_feature_selection_criterion(df, X_fs, y_fs):
+def plot_feature_selection_criterion(df, X_fs, y_fs, model_name = "", save = False):
     # plot model selection criteria against the model complexity.
     p = len(X_fs.columns)
     m = len(y_fs)
+    
     hat_sigma_squared = (1/(m - p -1)) * min(df['RSS'])
     df['C_p'] = (1/m) * (df['RSS'] + 2 * df['numb_features'] * hat_sigma_squared )
     df['AIC'] = (1/(m*hat_sigma_squared)) * (df['RSS'] + 2 * df['numb_features'] * hat_sigma_squared )
@@ -111,7 +112,10 @@ def plot_feature_selection_criterion(df, X_fs, y_fs):
         ax.set_xlabel('Number of predictors')
         ax.set_ylabel(v)
 
-    fig.suptitle('Subset selection using C_p, AIC, BIC, Adjusted R2', fontsize = 16)
+    fig.suptitle(f'Subset selection using C_p, AIC, BIC, Adjusted R2 for {model_name}', fontsize = 16)
+    
+    if save:
+        fig.savefig(f"Images/EDA/feature_selection_{model_name}.png")
     plt.show()
     return df
 
