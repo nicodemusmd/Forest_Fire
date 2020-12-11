@@ -119,8 +119,14 @@ def plot_feature_selection_criterion(df, X_fs, y_fs, model_name = "", save = Fal
     plt.show()
     return df
 
-# print("---------------------------------------")
-# print("---------------------------------------")
-# print(f"\nModel: {r.activation} \nLayers: {r.n_layers_} \nSize: {s} \nMSE: {MSE(y_test, y_pred)}\nR^2 Score: {round(r2_score(y_test, y_pred), 2)}\nExplained Variace: {round(EV(y_test, y_pred),2)}\nMean Absolute Error: {round(MAE(y_test, y_pred),2)}")
-#         pd.DataFrame(r.loss_curve_).plot(title = f"Model: {r.activation} \nLayers: {r.n_layers_}")
-#         print("\n")
+def printReport(r, X, y, s):
+    y_pred = r.predict(X)
+    print("---------------------------------------")
+    print("---------------------------------------")
+    print(f"\nModel: {r.activation} \nLayers: {r.n_layers_} \nSize: {s} \nMSE: {MSE(y_test, y_pred)}\nR^2 Score: {round(r2_score(y_test, y_pred), 2)}\nExplained Variace: {round(EV(y_test, y_pred),2)}\nMean Absolute Error: {round(MAE(y_test, y_pred),2)}")
+    fig = plt.figure()
+    figure = pd.DataFrame(r.loss_curve_).plot(title = f"Model: {r.activation} \nLayers: {r.n_layers_}",xlabel = "epoch", ylabel = "Loss")
+    fig = figure.get_figure()
+    fig.savefig(f"Images/N_Net/{r.activation}_{r.n_layers_}.png")
+    fig.show()
+    print("\n")
