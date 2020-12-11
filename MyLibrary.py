@@ -27,7 +27,7 @@ from sklearn.model_selection import train_test_split as TTS
 
 
 def predRespPlots(X, y, save = False, path = "", file_type = ".png"):
-    col = X.columns.drop(y)
+col = X.columns.drop(y)
     for c in col:
         if isinstance(X[c][0], str):
             X.boxplot(y, by = c)
