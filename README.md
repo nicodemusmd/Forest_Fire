@@ -1,3 +1,3 @@
 # Forest_Fire
 
-This project is still in progress but feel free to look around.
+This project was completed during my Master's program in Applied Statistics
